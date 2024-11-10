@@ -1,5 +1,6 @@
 "use client";
 
+import { revalidatePathAction } from "@/app/_actions/action";
 import { createOrderOptions } from "@/app/_actions/payment.action";
 import { trpc } from "@/trpc/client";
 import { useRouter } from "next/navigation";
@@ -47,7 +48,7 @@ function CheckoutButton({
           razorpay_signature,
           databaseOrderId: orderIds?.order_id,
         })
-
+        await revalidatePathAction(`/product/order/summary`, "layout");
           console.log("🚀 ~ file: payment.action.ts:73 ~ res:", res)
           if (res.success) {
             router.push(`/payment/success/${orderIds?.order_id}`);

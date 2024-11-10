@@ -154,17 +154,20 @@ export const kitRouter = createTRPCRouter({
     .mutation(async (req) => {
       const { kitId } = req.input;
 
-      const user = await User.findById(req.ctx.user.user.id);
+      const existingUser = await User.findById(req.ctx.user.user.id);
+      if (!existingUser?.cartItems?.includes(kitId)) {
+        await User.findByIdAndUpdate(req.ctx.user.user.id, {
+          $addToSet: { cartItems: kitId },
+        }, { new: true });
+      }
+      
 
-      if (!user)
+      if (!existingUser)
         return {
           success: false,
           status: 404,
           error: "User not found",
         };
-
-      user.cartItems.push(kitId);
-      await user.save();
 
       return {
         success: true,
@@ -211,6 +214,10 @@ export const kitRouter = createTRPCRouter({
         { new: true },
       );
 
+      console.log("🚀 ~ file: kit.router.ts:233 ~ .mutation ~ user:", user)
+
+      console.log("🚀 ~ file: kit.router.ts:233 ~ .mutation ~ user:", user)
+
       if (!user)
         return {
           success: false,
@@ -224,4 +231,6 @@ export const kitRouter = createTRPCRouter({
         message: "Kit removed from cart",
       };
     }),
+
+
 });

@@ -16,6 +16,8 @@ import { IoMdCheckmarkCircleOutline, IoMdMore } from "react-icons/io";
 import { Button } from "../ui/button";
 import { useToast } from "../ui/use-toast";
 import ProductCarousel from "./product-carousel";
+import { revalidatePath } from "next/cache";
+import { revalidatePathAction } from "@/app/_actions/action";
 
 function ProductCard({
   kit,
@@ -81,8 +83,9 @@ function ProductCard({
           <div className="flex flex-col items-center justify-center gap-2">
             <Button
               className="w-full bg-primary"
-              onClick={() => {
+              onClick={async () => {
                 addToCart({ kitId: kit._id as string });
+                await revalidatePathAction(`/product/${kit._id}`, "layout");
               }}
             >
               Add to Cart

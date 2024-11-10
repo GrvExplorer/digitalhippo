@@ -89,17 +89,19 @@ function UserButton({ mode = "modal" }: UserButtonProps) {
         <DropdownMenuSeparator />
 
         {user.isSeller && (
+          <>
           <Link href={"/seller-dashboard"}>
             <DropdownMenuItem className="flex cursor-pointer gap-8 px-4 py-2">
               <p className="">
-                <ShieldAlert />
+                <ShieldAlert className="h-4 w-4" />
               </p>
               <p className="text-lg">Seller</p>
             </DropdownMenuItem>
           </Link>
+          <DropdownMenuSeparator />
+          </>
         )}
 
-        <DropdownMenuSeparator />
 
         <LogoutButton>
           <DropdownMenuItem className="flex cursor-pointer gap-8 px-4 py-2">

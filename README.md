@@ -1,4 +1,4 @@
-# Welcome! To 👋
+****# Welcome! To 👋
 
   <p align="left"> <img src="./public/banner.png" alt="banner" /> </p>
 
@@ -24,16 +24,21 @@
 - [x] use can add product to cart
 - [x] user can purchase kits
 - [x] user can see the orders and can download product
+- [x] only add one item if duplicate
 
 
 ### TODO's
 
 - [ ] in Product add  features 
 - [ ] Seller can add download link
+- [ ] use react query to revalidate on mutations ( now next/cache is used )
+- [ ] create categories page 
 
 
 - [ ] verify seller using email
 - [ ] seller profile (logo, banner, ...other)
+- [ ] navbar UI kits icons container (create dropdown )& fix it 
+- [ ] fix carousel issue
 
 ### Reuse components
 

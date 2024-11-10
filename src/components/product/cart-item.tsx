@@ -10,6 +10,7 @@ import { Cross2Icon } from "@radix-ui/react-icons";
 import { Separator } from "@radix-ui/react-separator";
 import Link from "next/link";
 import { Button } from "../ui/button";
+import { revalidatePathAction } from "@/app/_actions/action";
 
 function CartItem({
   kit,
@@ -48,8 +49,12 @@ function CartItem({
                   <>
                     <Button
                       variant="link"
-                      onClick={() => {
+                      onClick={async () => {
                         removeFromCart({ kitId: kit._id as string });
+                        await revalidatePathAction(
+                          `/product/${kit._id}`,
+                          "layout"
+                        );
                       }}
                     >
                       <Cross2Icon className="h-5 w-6 text-black" />
